@@ -1,0 +1,77 @@
+//ECE style color table
+$cmf-blue: #2f9acc;
+$cmf-blue-lesser: #e7f1f6;
+$cmf-yellow: #fff568;
+$cmf-yellow-active: #ffe32b;
+$cmf-orange-color: #f7941e;
+$cmf-red-color: #ed1c24;
+
+//Abstract named theme color table
+$theme-grayscale-255: White;
+$theme-grayscale-235: #b7b7b7;
+$theme-grayscale-99: #636363;
+$theme-grayscale-0: Black;
+$theme-main-color: $cmf-blue;
+$theme-lesser-color: $cmf-blue-lesser;
+$theme-secondary-color: $cmf-yellow;
+$theme-secondary-color-active: $cmf-yellow-active;
+
+//CSS attribute color table
+$bg-color-light: $theme-grayscale-255;
+//$bg-color-light-translucent-45: rgba(255, 255, 255, 0.45);
+//$bg-color-light-translucent-45-data-uri: '${data-uri}/bg-color-light-translucent-45.png';
+//$bg-color-dark: $theme-grayscale-63;
+//$bg-color-dark-translucent-30: rgba(55, 66, 68, 0.3);
+//$bg-color-dark-translucent-30-data-uri: '${data-uri}/bg-color-dark-translucent-30.png';
+//$bg-color-dark-translucent-88: rgba(55, 66, 68, 0.88);
+//$bg-color-dark-translucent-88-data-uri: '${data-uri}/bg-color-dark-translucent-88.png';
+//$bg-color-gray: $theme-grayscale-204;
+
+$text-color-light: $theme-grayscale-255;
+$text-color-dark: $theme-grayscale-99;
+$text-color-gray: $theme-grayscale-235;
+
+$border-color: #b6b6b6;
+//$border-color-light: $theme-grayscale-221;
+//$border-color-dark: $theme-grayscale-63;
+//$border-color-dark-translucent: rgba(0, 0, 0, 0.1);
+
+//Element color table
+//$input-text-placeholder-color: $theme-grayscale-204;
+
+$widget-bg-color: $theme-grayscale-255;
+//$widget-bg-color-lesser: $theme-grayscale-250;
+//$widget-bg-color-alternate: $theme-grayscale-238;
+$widget-border-color: $border-color;
+$widget-border-color-lesser: #d0d0d0;
+//$widget-border-color-light: $border-color-light;
+//$widget-shadow-color: $theme-grayscale-238;
+
+$body-bg-color: $theme-main-color;
+$body-color: $text-color-dark;
+
+//Interactive color table
+//$element-color-gray: $theme-grayscale-187;
+//$element-color-gray-hover: $theme-grayscale-221;
+//$element-color-gray-active: $theme-grayscale-187;
+//$element-color-gray-disabled: $theme-grayscale-221;
+
+$button-default-bg-color: $cmf-blue;
+$button-default-bg-color-hover: mix($button-default-bg-color, White, 65);
+$button-default-bg-color-active: mix($button-default-bg-color, Black, 85);
+$button-default-bg-color-disabled: #9e9e9e;
+$button-default-color: $text-color-light;
+$button-default-color-hover: $text-color-light;
+$button-default-color-active: $text-color-light;
+//
+//$data-grid-thead-bg: #F3F3F3;
+//$data-grid-tr-odd-bg: $widget-bg-color;
+//$data-grid-tr-even-bg: #F9F9F9;
+//$data-grid-tr-bg-hover: mix($theme-main-color, $widget-bg-color, 5%);
+
+@mixin bg-color-interactive-highlight() {
+    @include bg-color-interactive($cmf-orange-color, mix($cmf-orange-color, White, 65), mix($cmf-orange-color, White, 65), mix($cmf-orange-color, Black, 95));
+}
+@mixin bg-color-interactive-lesser() {
+    @include bg-color-interactive(#969696, mix(#969696, White, 65), mix(#969696, White, 65), mix(#969696, Black, 95));
+}

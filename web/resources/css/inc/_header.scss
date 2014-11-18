@@ -1,0 +1,128 @@
+.page-logo {
+    float: left;
+}
+.select-area {
+    @include clearfix;
+    float: left;
+    margin-top: 43px;
+    background-color: $bg-color-light;
+    color: $text-color-dark;
+    vertical-align: bottom;
+
+    > span {
+        float: left;
+        display: block;
+        width: 4em;
+        height: 27px;
+        line-height: 27px;
+        padding: 0 1em;
+    }
+    > a {
+        float: left;
+        display: block;
+        width: 27px;
+        height: 27px;
+        background: $theme-secondary-color url("../images/select-area-arrow.png") no-repeat center center   ;
+
+
+        &:hover, &:focus {
+            background-color: $theme-secondary-color-active;
+        }
+    }
+    ul {
+        display: none;
+        position: absolute;
+        margin: 0;
+        padding: 0;
+        background-color: $bg-color-light;
+        z-index: 10;
+
+        li {
+            list-style: none;
+
+        a {
+            display: block;
+            width: 4em;
+            height: 27px;
+            line-height: 27px;
+            padding: 0 1em;
+            color: $text-color-dark;
+            text-decoration: none;
+
+            &:hover, &:focus {
+                background-color: $theme-secondary-color-active;
+            }
+        }
+    }
+}
+}
+.page-toolbar {
+    float: right;
+    margin-right: $widget-spacing * 4;
+
+    > span {
+        margin-left: 2em;
+    }
+    a {
+        color: $text-color-light;
+        text-decoration: none;
+        vertical-align: bottom;
+
+        &:hover, &:focus, &.active {
+            color: $theme-secondary-color;
+        }
+
+        span {
+            vertical-align: bottom;
+        }
+    }
+}
+.page-nav {
+    float: right;
+    width: 576px;
+    height: 36px;
+    line-height: 36px;
+    margin-top: 8px;
+    margin-right: $widget-spacing * 4;
+    background-color: $theme-secondary-color;
+    font-size: $font-size-big;
+
+    a {
+        float: left;
+        width: 144px;
+        color: $text-color-dark;
+        text-align: center;
+        text-decoration: none;
+        @include transition-property(background);
+        @include transition-duration(0.25s);
+
+        &:hover, &:focus, &.active {
+            background-color: $theme-secondary-color-active;
+        }
+    }
+}
+.account-list {
+    margin: 0;
+    padding: 0;
+
+    li {
+        list-style: none;
+
+        a {
+            display: block;
+            height: 36px;
+            line-height: 36px;
+            padding: 0 1em;
+            color: $text-color-dark;
+
+            &:hover, &:focus {
+                color: $theme-main-color;
+            }
+        }
+
+        + li {
+            border-top: 1px solid #d0d0d0;
+        }
+    }
+
+}

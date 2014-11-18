@@ -1,0 +1,274 @@
+﻿/* fix ie6/ie7 default browser vertical scrollbar */
+* html, * + html {
+    overflow: auto;
+}
+
+/* set form element font inherit, padding, and margin
+* input[type="text"] and textarea border are set to outer, others are set to inner
+*/
+input[type="text"],
+button,
+input[type="button"],
+input[type="submit"],
+textarea,
+select {
+    font: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+textarea::-ms-clear,
+input[type="text"]::-ms-clear {
+    display: none;
+}
+
+/* fixed table */
+.table-fixed {
+    table-layout: fixed;
+}
+
+/* add word break style for all browsers */
+.word-break {
+    //break word
+    white-space: normal;
+    word-wrap: break-word;
+}
+
+.word-break-all {
+    //break all
+    white-space: normal;
+    word-break: break-all;
+}
+
+.no-word-break {
+    //no break
+    white-space: nowrap;
+    word-break: keep-all;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    min-width: 2em; /* width is required */
+}
+
+/* add lowercase/uppercase */
+.uppercase {
+    text-transform: uppercase;
+}
+
+.lowercase {
+    text-transform: lowercase;
+}
+
+/* fix ie6/7 inline-block issue */
+.inline-block {
+    zoom: 1;
+    display: inline;
+}
+
+/* Text truncation */
+.text-ellipsis {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* remove input text inline clear button of ie9+ */
+@mixin no-ms-clear() {
+    &::-ms-clear {
+        display: none;
+    }
+}
+
+@function opacity-color-stops ($opacity, $color-stops) {
+	$list: ();
+
+	@each $color in $color-stops {
+		@if length($color) == 2 {
+			$list: append($list, rgba(nth($color, 1), $opacity / 100) nth($color, 2), comma);
+		}
+		@else {
+			$list: append($list, rgba($color, $opacity / 100), comma);
+		}
+	}
+
+	@return $list;
+}
+
+@function ps_effect-shadow ($color: Black, $opacity: 75, $angle: 120, $distance: 5, $size: 5) {
+	@if $opacity < 100 {
+		$color: rgba($color, $opacity * 0.01);
+	}
+
+	$cos: cos($angle * 1deg);
+	@if $cos > 0.4999 and $cos < 0.5 {
+		$cos: 0.5;
+	}
+	@if $cos > -0.5 and $cos < -0.4999 {
+		$cos: -0.5;
+	}
+	
+	$sin: sin($angle * 1deg);
+	@if $sin > 0.4999 and $sin < 0.5 {
+		$sin: 0.5;
+	}
+	@if $sin > -0.5 and $sin < -0.4999 {
+		$sin: -0.5;
+	}
+
+	@return round($cos * -$distance) + px round($sin * $distance) + px $size + px $color;
+}
+@function ps_effect-inner_shadow ($color: Black, $opacity: 75, $angle: 120, $distance: 5, $size: 5) {
+	@return ps_effect-shadow($color, $opacity, $angle, $distance, $size) inset;
+}
+@function ps_effect-outer_glow ($color: #FFFFBE, $opacity: 75, $size: 5) {
+	@return ps_effect-shadow($color, $opacity, 0, 0, $size);
+}
+@function ps_effect-inner_glow ($color: #FFFFBE, $opacity: 75, $size: 5) {
+	@return ps_effect-shadow($color, $opacity, 0, 0, $size) inset;
+}
+@mixin ps_effect-gradient-linear ($opacity: 100, $color-stops: (White, Black), $angle: 90) {
+    @if $opacity < 100 {
+        $color-stops: opacity-color-stops($opacity, $color-stops);
+    }
+
+    $linear-gradient: linear-gradient($angle * 1deg, $color-stops);
+    @if $experimental-support-for-webkit and prefixed(-webkit, $linear-gradient) {
+        background-image: -webkit($linear-gradient);
+    }
+    @if $experimental-support-for-mozilla and prefixed(-moz, $linear-gradient) {
+        background-image: -moz($linear-gradient);
+    }
+    @if $experimental-support-for-opera and prefixed(-o, $linear-gradient) {
+        background-image: -o($linear-gradient);
+    }
+
+    $css3-angle: 0;
+    @if $angle < 0 {
+        $css3-angle: -$angle + 90;
+    }
+    @if $angle >= 0 and $angle <= 90 {
+        $css3-angle: 90 - $angle;
+    }
+    @if $angle > 90 {
+        $css3-angle: -($angle - 90);
+    }
+    background-image: linear-gradient($css3-angle * 1deg, $color-stops);
+}
+
+@mixin text-color-interactive($color-default, $color-hover, $color-focus: false, $color-active: false, $color-visited: false, $class-name: false) {
+    color: $color-default;
+
+    @if $color-visited != false {
+        &:visited {
+            color: $color-visited;
+        }
+    }
+    @if $color-focus != false {
+        &:focus {
+            color: $color-focus;
+        }
+    }
+    &:hover {
+        color: $color-focus;
+    }
+    @if $color-active != false {
+        &:active {
+            color: $color-active;
+        }
+    }
+    @if $class-name != false {
+        &.#{class-name} {
+            color: $color-interactive;
+        }
+    }
+}
+
+@mixin bg-color-interactive($color-default, $color-hover, $color-focus: false, $color-active: false, $color-visited: false, $class-name: false) {
+    background-color: $color-default;
+
+    @if $color-visited != false {
+        &:visited {
+            background-color: $color-visited;
+        }
+    }
+    @if $color-focus != false {
+        &:focus {
+            background-color: $color-focus;
+        }
+    }
+    &:hover {
+        background-color: $color-focus;
+    }
+    @if $color-active != false {
+        &:active {
+            background-color: $color-active;
+        }
+    }
+    @if $class-name != false {
+        &.#{class-name} {
+            background-color: $color-interactive;
+        }
+    }
+}
+
+@mixin border-color-interactive($color-default, $color-hover, $color-focus: false, $color-active: false, $color-visited: false, $class-name: false) {
+    border-color: $color-default;
+
+    @if $color-visited != false {
+        &:visited {
+            border-color: $color-visited;
+        }
+    }
+    @if $color-focus != false {
+        &:focus {
+            border-color: $color-focus;
+        }
+    }
+    &:hover {
+        border-color: $color-focus;
+    }
+    @if $color-active != false {
+        &:active {
+            border-color: $color-active;
+        }
+    }
+    @if $class-name != false {
+        &.#{class-name} {
+            border-color: $color-interactive;
+        }
+    }
+}
+
+@mixin dl-tablication ($dt-width: auto, $dl-line-height: inherit) {
+	line-height: $dl-line-height;
+
+	dt {
+		float: left;
+		width: $dt-width;
+		text-align: right;
+
+		&.long {
+			float: none;
+			width: auto;
+			text-align: left;
+		}
+	}
+
+	dd {
+		padding-left: $dt-width;
+
+		&.long {
+			padding-left: 0;
+		}
+	}
+}
+
+@mixin inline-list ($item-tag: div, $item-width: auto, $item-margin-right: 0) {
+	#{$item-tag} {
+		display: inline-block;
+		min-width: $item-width;
+		margin-right: $item-margin-right;
+		*display: inline;
+		*zoom: 1;
+	}
+}

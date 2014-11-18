@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE urlrewrite PUBLIC "-//tuckey.org//DTD UrlRewrite 3.2//EN"
+        "http://tuckey.org/res/dtds/urlrewrite3.2.dtd">
+<urlrewrite>
+        <rule>
+            <from>^/index.html$</from>
+            <to>/home.jsp</to>
+        </rule>
+        <rule>
+            <from>^/home.html$</from>
+            <to>/home.jsp</to>
+        </rule>
+        <rule>
+            <from>^/news.html$</from>
+            <to>/news.jsp</to>
+        </rule>
+        <rule>
+            <from>^/product.html$</from>
+            <to>/product.jsp</to>
+        </rule>
+        <rule>
+            <from>^/team.html$</from>
+            <to>/team.jsp</to>
+        </rule>
+        <rule>
+            <from>^/case.html$</from>
+            <to>/case.jsp</to>
+        </rule>
+        <rule>
+            <from>^/course.html$</from>
+            <to>/course.jsp</to>
+        </rule>
+        <rule>
+            <from>^/listen.html$</from>
+            <to>/listen.jsp</to>
+        </rule>
+        <rule>
+            <from>^/venues.html$</from>
+            <to>/venues.jsp</to>
+        </rule>
+        
+        
+        <rule>
+            <from>^/case_(.*).html$</from>
+            <to>/case.jsp?id=$1</to>
+        </rule>
+        
+        <rule>
+            <from>^/listen_(.*).html$</from>
+            <to>/listen.jsp?id=$1</to>
+        </rule>
+       
+		<rule>
+            <from>^/news_(.*).html$</from>
+            <to>/news.jsp?id=$1</to>
+        </rule>
+        
+</urlrewrite>  

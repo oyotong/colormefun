@@ -1,0 +1,36 @@
+/**
+ * @author GeekTantra
+ * @date 20 September 2009
+ */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0px 0px 10px;
+    font-size: 22px;
+}
+
+input {
+    border: 1px solid #888;
+    background: #ffffff;
+    padding: 3px 4px;
+    color: #222;
+    border-radius: 7px;
+    -moz-border-radius: 7px;
+}
+
+input.ErrorField {
+    border: 1px solid #D00;
+    color: #D00;
+}
+
+span.ValidationErrors {
+    display: inline-block;
+    font-size: 12px;
+    color: #D00;
+    padding-left: 10px;
+    font-style: italic;
+}

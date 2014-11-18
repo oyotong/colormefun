@@ -1,0 +1,65 @@
+.footer-copyright {
+    float: right;
+}
+.footer-logo {
+    margin-right: 50px;
+    vertical-align: top;
+}
+.contact-button {
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    color: $text-color-light;
+    text-decoration: none !important;
+    vertical-align: top;
+    white-space: nowrap;
+
+    .ui-icon {
+        display: block;
+        width: 40px;
+        height: 40px;
+        margin: 0 auto;
+        background-image: url("../images/contacts-button-icon.png");
+        background-repeat: no-repeat;
+
+        &.icon-weibo {
+            background-position: 0 0;
+        }
+        &.icon-wechat {
+            background-position: -40px 0;
+        }
+        &.icon-linkedin {
+            background-position: -80px 0;
+        }
+        &.icon-qzone {
+            background-position: -120px 0;
+        }
+    }
+    span {
+        display: block;
+        margin: 0;
+        visibility: hidden;
+        line-height: 2.5em;
+        text-align: center;
+    }
+
+    &:hover {
+        .ui-icon {&.icon-weibo {
+            background-position: 0 -40px;
+        }
+            &.icon-wechat {
+                background-position: -40px -40px;
+            }
+            &.icon-linkedin {
+                background-position: -80px -40px;
+            }
+            &.icon-qzone {
+                background-position: -120px -40px;
+            }
+        }
+
+        span {
+            visibility: visible;
+        }
+    }
+}

@@ -1,0 +1,6 @@
+.inputOk {
+    background: url(/resources/images/icon/ok.gif) right center no-repeat;
+}
+.inputErr {
+    background: url(/resources/images/icon/jian.jpg) right center no-repeat;
+}

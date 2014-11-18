@@ -1,0 +1,15 @@
+$font-family-serif: "Times New Roman", Times, serif;
+//"Palatino Linotype", "Book Antiqua", Palatino, serif | "Times New Roman", Times, serif
+$font-family-sans-serif: sans-serif;
+//"Trebuchet MS", Helvetica, sans-serif | Verdana, Geneva, sans-serif | Tahoma, Geneva, sans-serif | "Arial Black", Gadget, sans-serif | "Comic Sans MS", cursive, sans-serif | Impact, Charcoal, sans-serif | "Lucida Sans Unicode", "Lucida Grande", sans-serif
+$font-family-monospace: "Courier New", Courier, monospace;
+//"Lucida Console", Monaco, monospace
+
+$font-weight-normal: 400;
+$font-weight-bold: 700;
+
+$font-size-default: 12px;
+$font-size-big: 16px;
+$font-size-small: 9px;
+$font-line-height-relative: 1.5;
+$font-line-height-default: $font-line-height-relative * 1em;

@@ -1,0 +1,58 @@
+<div class="page-wrapper">
+    <header class="page-content">
+        <h1 class="page-logo"><img src="resources/images/logo.png" alt="快乐秘方 Color Me Fun" /></h1>
+        <div class="select-area">
+            <span>成都市</span>
+            <a href="javascript:void(0);"></a>
+            <ul>
+                <li><a href="#">成都市</a></li>
+                <li><a href="#">绵阳市</a></li>
+                <li><a href="#">自贡市</a></li>
+                <li><a href="#">攀枝花市</a></li>
+                <li><a href="#">泸州市</a></li>
+                <li><a href="#">德阳市</a></li>
+            </ul>
+        </div>
+        <div class="page-toolbar">
+            <span>
+                <a href="cart.htm"><s class="ui-icon icon-favorite"></s><span>收藏夹 (2)</span></a>
+            </span>
+            <span>
+                <a href="cart.htm"><s class="ui-icon icon-cart"></s><span>购物车 (2)</span></a>
+            </span>
+            <span>
+                <a id="myCmf" href="javascript:void(0);"><s class="ui-icon icon-account"></s><span>我的快乐秘方</span><s class="ui-icon icon-arrow"></s></a>
+                <a href="javascript:void(0);">磊子 [退出]</a>
+            </span>
+            <div id="myCmfList" class="bubble">
+                <s class="ui-icon icon-bubble-arrow-top"></s>
+                <ul class="account-list">
+                    <li><a href="my_order.htm">我的订单</a></li>
+                    <li><a href="#">我的信息</a></li>
+                </ul>
+            </div>
+        </div>
+        <nav class="page-nav">
+            <a href="index.htm">活动日历</a>
+            <a href="#">FUN相册</a>
+            <a href="#">私人订制</a>
+            <a href="#">关于快乐秘方</a>
+        </nav>
+    </header>
+    <script type="text/javascript">
+        var selectArea = ui.Popup($('.select-area > a'), $('.select-area > ul'), {
+            clickToShow: true,
+            position: {
+                my: 'right top',
+                at: 'left bottom'
+            }
+        });
+        var accountBubble = ui.Popup($('#myCmf'), $('#myCmfList'), {
+            clickToShow: true,
+            activeClass: true,
+            position: {
+                my: 'center top+14',
+                at: 'center bttom'
+            }
+        });
+    </script>

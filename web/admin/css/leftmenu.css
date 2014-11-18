@@ -1,0 +1,50 @@
+body {
+	margin: 0px;
+	background: transparent;
+	overflow: hidden;
+	background: url("../images/leftbg.gif");
+}
+
+.left_color {
+	text-align: right;
+}
+
+.left_color a {
+	color: #083772;
+	text-decoration: none;
+	font-size: 12px;
+	display: block !important;
+	display: inline;
+	width: 175px !important;
+	width: 180px;
+	text-align: right;
+	background: url("../images/menubg.gif") right no-repeat;
+	height: 23px;
+	line-height: 23px;
+	padding-right: 10px;
+	margin-bottom: 2px;
+}
+
+.left_color a:hover {
+	color: #7B2E00;
+	background: url("../images/menubg_hover.gif") right no-repeat;
+}
+
+img {
+	float: none;
+	vertical-align: middle;
+}
+
+#Menu_On {
+	background: #fff url("../images/menubg_on.gif") right no-repeat;
+	color: #f20;
+	font-weight: bold;
+}
+
+hr {
+	width: 90%;
+	text-align: left;
+	size: 0;
+	height: 0px;
+	border-top: 1px solid #46A0C8;
+}

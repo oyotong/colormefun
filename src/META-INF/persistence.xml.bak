@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.colormefun.entity.MfCart</class>
+        <class>com.colormefun.entity.MfCartCoupon</class>
+        <class>com.colormefun.entity.MfCartDetail</class>
+        <class>com.colormefun.entity.MfCase</class>
+        <class>com.colormefun.entity.MfContent</class>
+        <class>com.colormefun.entity.MfCoupon</class>
+        <class>com.colormefun.entity.MfFavorite</class>
+        <class>com.colormefun.entity.MfOrder</class>
+        <class>com.colormefun.entity.MfOrderCoupon</class>
+        <class>com.colormefun.entity.MfOrderDetail</class>
+        <class>com.colormefun.entity.MfUser</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username" value="root"/>
+            <property name="hibernate.connection.password" value="admin"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

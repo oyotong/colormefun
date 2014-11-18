@@ -1,0 +1,126 @@
+$icon-size-default: 16px;
+
+.ui-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+
+    + span {
+        margin-left: 0.25em;
+        vertical-align: middle;
+    }
+
+    &.icon-account {
+        width: 21px;
+        height: 24px;
+        background: url("../images/icon/account.png") no-repeat center center;
+
+        a:hover &, a:focus &, a.active & {
+            background-image: url("../images/icon/account-active.png");
+        }
+    }
+    &.icon-arrow {
+        width: 20px;
+        height: 20px;
+        background: url("../images/icon/arrow.png") no-repeat center center;
+
+        a:hover &, a:focus &, a.active & {
+            background-image: url("../images/icon/arrow-active.png");
+        }
+    }
+    &.icon-cart {
+        width: 28px;
+        height: 26px;
+        background: url("../images/icon/cart.png") no-repeat center center;
+
+        a:hover &, a:focus & {
+            background-image: url("../images/icon/cart-active.png");
+        }
+    }
+    &.icon-favorite {
+        width: 28px;
+        height: 26px;
+        background: url("../images/icon/favorite.png") no-repeat center center;
+
+        a:hover &, a:focus & {
+            background-image: url("../images/icon/favorite-active.png");
+        }
+    }
+    &.icon-bubble-arrow-top {
+        width: 14px;
+        height: 7px;
+        background: url("../images/icon/bubble-arrow-top.png") no-repeat center center;
+    }
+    &.icon-calendar-prev {
+        width: 20px;
+        height: 20px;
+        background: url("../images/icon/calendar-prev.png") no-repeat center center;
+    }
+    &.icon-calendar-next {
+        width: 20px;
+        height: 20px;
+        background: url("../images/icon/calendar-next.png") no-repeat center center;
+    }
+    &.icon-info {
+        width: 19px;
+        height: 19px;
+        background: url("../images/icon/info-msg.png") no-repeat center center;
+    }
+    &.icon-confirm-info-msg {
+        width: 24px;
+        height: 24px;
+        background: url("../images/icon/confirm-info-msg.png") no-repeat center center;
+    }
+    &.icon-required {
+        background: url("../images/icon/required.png") no-repeat center center;
+    }
+    &.icon-setting {
+        background: url("../images/icon/setting.png") no-repeat center center;
+    }
+    &.icon-delete-favorite {
+        background: url("../images/icon/delete-favorite.png") no-repeat center center;
+    }
+    &.icon-rank {
+        width: 12px;
+        height: 12px;
+        background: url("../images/icon/rank.png") no-repeat center center;
+    }
+    &.icon-rank-active {
+        width: 12px;
+        height: 12px;
+        background: url("../images/icon/rank-active.png") no-repeat center center;
+    }
+    &.icon-help {
+        width: 13px;
+        height: 13px;
+        background: url("../images/icon/help.png") no-repeat center center;
+    }
+    &.icon-zoom {
+        width: 17px;
+        height: 17px;
+        background: url("../images/icon/zoom.png") no-repeat center center;
+
+        a:hover &, a:focus &, a.active & {
+            background-image: url("../images/icon/zoom-active.png");
+        }
+    }
+    &.icon-add-to-favorite {
+        width: 16px;
+        height: 14px;
+        background: url("../images/icon/add-to-favorite.png") no-repeat center center;
+
+        a:hover &, a:focus &, a.active & {
+            background-image: url("../images/icon/add-to-favorite-active.png");
+        }
+    }
+    &.icon-share {
+        width: 17px;
+        height: 19px;
+        background: url("../images/icon/share.png") no-repeat center center;
+
+        a:hover &, a:focus &, a.active & {
+            background-image: url("../images/icon/share-active.png");
+        }
+    }
+}
