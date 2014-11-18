@@ -1,0 +1,6 @@
+To-do:
+1. Report
+2. Add to waitting list
+3. Case Detail, team description
+4. About me
+5. Email Templete
