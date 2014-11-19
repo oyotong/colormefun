@@ -1,6 +1,7 @@
 To-do:
-1. Report
-2. Add to waitting list
-3. Case Detail, team description
-4. About me
-5. Email Templete
+1. Report(Waiting for test)
+2. Add to waiting list
+3. Email Template
+4. Case Detail, team description (Waiting the mockup )
+5. About me (Waiting the mockup )
+
