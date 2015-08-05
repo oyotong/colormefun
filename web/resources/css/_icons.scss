@@ -114,13 +114,13 @@ $icon-size-default: 16px;
             background-image: url("../images/icon/add-to-favorite-active.png");
         }
     }
-    &.icon-share {
+    &.icon-shareDetail {
         width: 17px;
         height: 19px;
-        background: url("../images/icon/share.png") no-repeat center center;
+        background: url("../images/icon/shareDetail.png") no-repeat center center;
 
         a:hover &, a:focus &, a.active & {
-            background-image: url("../images/icon/share-active.png");
+            background-image: url("../images/icon/shareDetail-active.png");
         }
     }
 }

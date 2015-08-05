@@ -194,8 +194,8 @@
                 <div class="activity-function">
                     <a href="javascript:void(0);" id="zoomBtn"><s class="ui-icon icon-zoom"></s><span>放大图片</span></a>
                     <a href="javascript:void(0);" id="addFavoriteBtn"><s class="ui-icon icon-add-to-favorite"></s><span>收藏</span></a>
-                    <a href="javascript:void(0);" onclick="bShare.more(event);" id="bshareBtn"><s class="ui-icon icon-share"></s><span>分享</span></a>
-                    <span style="display: none"><a class="bshareDiv" id="bshareLink" href="http://www.bshare.cn/share">分享</a></span>
+                    <a href="javascript:void(0);" onclick="bShare.more(event);" id="bshareBtn"><s class="ui-icon icon-shareDetail"></s><span>分享</span></a>
+                    <span style="display: none"><a class="bshareDiv" id="bshareLink" href="http://www.bshare.cn/shareDetail">分享</a></span>
                     <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#uuid=&amp;style=10&amp;bgcolor=Orange&amp;ssc=false&amp;pophcol=1"></script>
                     <p class="BSHARE_TEXT" style="display: none">和我一起参加${mf:fmtMyDate(mfCase.startDate,"MM月dd日（E）")}在${mfCase.location}的快乐秘方派对吧！Let's have some fun!</p>
                 </div>
