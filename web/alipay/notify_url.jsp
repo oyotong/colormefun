@@ -19,7 +19,7 @@
 <%@ page import="java.util.*"%>
 <%@ page import="com.alipay.util.*"%>
 <%@ page import="com.alipay.config.*"%>
-<%@ page import="shop.common.util.JavaBeanUtil" %>11
+<%@ page import="shop.common.util.JavaBeanUtil" %>
 <%
 	//获取支付宝POST过来反馈信息
 	Map<String,String> params = new HashMap<String,String>();
