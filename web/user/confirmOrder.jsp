@@ -3,6 +3,11 @@
 <c:set var="_title" value="确认订单" />
 <%@include file ="../inc/header.jsp" %>
 <!-- #include file ="inc/header.htm" -->
+<script type="text/javascript">
+var toAlipay = function() {
+window.location='/user/cart/toAlipay.do?orderNo=${orderNo}';
+}
+</script>
 <div class="page-content">
     <div class="main-content">
         <div class="cart-header">
@@ -17,7 +22,7 @@
         <table class="datagrid">
             <tbody>
                 <tr class="title">
-                    <td colspan="5"><h1>确认订单信息</h1></td>
+                    <td colspan="5"><h1>确认订单信息, 订单编号: ${orderNo}</h1></td>
                 </tr>
                 <tr class="thead">
                     <td></td>
@@ -91,7 +96,7 @@
                 <dd><span class="price color-main">${mf:fmtMoney(balance)}</span></dd>
             </dl>
             <div class="command-group">
-                <button class="button-highlight" type="button"><span>支付订单</span></button>
+                <button class="button-highlight" onclick="toAlipay();" type="button"><span>支付订单</span></button>
             </div>
         </div>
     </div>

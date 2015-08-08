@@ -1,8 +1,12 @@
 package com.colormefun.service;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.alipay.util.UtilDate;
+import com.colormefun.entity.MfCart;
+import com.colormefun.entity.MfOrderDetail;
 import com.colormefun.entity.MfUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -130,14 +134,51 @@ public class MfOrderServiceImpl implements MfOrderService {
         saveMfOrder(oldOne);
     }
 
-    @Override
-    public void payOrder(MfOrder order) {
-        MfOrder oldOne = getMfOrderById(order.getOrderNo());
+    public void completePayOrder(String orderNo) {
+        MfOrder oldOne = getMfOrderById(orderNo);
         if(null == oldOne || !oldOne.getStatus().equals(MfOrder.OrderStatus.created.name())){
             throw new ApplicationException("无效的订单状态，无法支付。");
         }
         oldOne.setStatus(MfOrder.OrderStatus.paid.name());
         saveMfOrder(oldOne);
+    }
+
+    @Override
+    public MfOrder createOrderByCart(List<MfCart> mfCartList) {
+            MfUser user = ApplicationContext.getContext().getCurrentMfUser();
+            Date now = new Date();
+
+            MfOrder order = new MfOrder();
+
+            order.setOrderNo(UtilDate.getOrderNum());
+
+            order.setStatus(MfOrder.OrderStatus.created.name());
+            order.setUserName(user.getUserName());
+            order.setUser(user);
+            order.setActive("Y");
+            order.setCreatedDate(now);
+            order.setComment(null);
+
+            Set<MfOrderDetail> details = new HashSet<MfOrderDetail>();
+            int i = 0;
+            for(MfCart cart : mfCartList){
+
+                MfOrderDetail detail = new MfOrderDetail();
+                detail.setOrderNo(order.getOrderNo());
+//                detail.setOrder(order);
+                detail.setCaseNo(cart.getMfCase().getCaseNo());
+                detail.setMfCase(cart.getMfCase());
+                detail.setLineNo(++i);
+                detail.setQty(cart.getQty());
+                detail.setPrice(cart.getMfCase().getTicketPrice());
+
+                details.add(detail);
+            }
+
+            order.setDetails(details);
+
+            saveMfOrder(order);
+            return order;
     }
 
 }

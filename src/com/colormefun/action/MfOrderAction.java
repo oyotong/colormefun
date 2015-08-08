@@ -1,7 +1,7 @@
 package com.colormefun.action;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.*;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
@@ -240,7 +240,7 @@ public class MfOrderAction extends AbstractAction implements Preparable,
         errMsg.isError = true;
 
         try{
-            this.mfOrderService.payOrder(order);
+            this.mfOrderService.completePayOrder(order.getOrderNo());
         }catch (ApplicationException e){
             errMsg.message = e.getMessage();
             json = errMsg;

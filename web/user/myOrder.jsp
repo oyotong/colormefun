@@ -40,7 +40,7 @@
         $.ajax({
             type: "get",
             dataType: "json",
-            url: "${ROOT}/user/order/payOrder.do",
+            url: "${ROOT}/user/cart/payOrder.do",
             data: "order.orderNo=" + orderNo,
             complete: function () {
             },

@@ -2,15 +2,15 @@ package com.colormefun.action;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
-import com.colormefun.entity.MfCase;
-import com.colormefun.entity.MfCoupon;
-import com.colormefun.entity.MfUser;
+import com.alipay.config.AlipayConfig;
+import com.alipay.util.AlipaySubmit;
+import com.alipay.util.UtilDate;
+import com.colormefun.entity.*;
 import com.colormefun.service.MfCaseService;
 import com.colormefun.service.MfCouponService;
+import com.colormefun.service.MfOrderService;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.InterceptorRef;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -21,7 +21,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.colormefun.entity.MfCart;
 import com.colormefun.service.MfCartService;
 import shop.Constants;
 import shop.common.action.auto.AbstractAction;
@@ -31,9 +30,13 @@ import com.opensymphony.xwork2.Preparable;
 import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.opensymphony.xwork2.validator.annotations.Validations;
 import com.opensymphony.xwork2.validator.annotations.ValidatorType;
+import shop.common.context.ApplicationContext;
 import shop.common.entity.JSONMessage;
 import shop.common.util.DateUtils;
 import shop.common.util.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @Scope("prototype")
@@ -48,6 +51,8 @@ public class MfCartAction extends AbstractAction implements Preparable,
 	private MfCartService mfCartService;
 	private MfCaseService mfCaseService;
 	private MfCouponService couponService;
+    private MfOrderService mfOrderService;
+    private String orderNo;
 	private List<MfCart> mfCartList;
 	private MfCart mfCart;
 	private MfCase mfCase;
@@ -84,11 +89,11 @@ public class MfCartAction extends AbstractAction implements Preparable,
 	}
 
 	@Autowired
-	public MfCartAction(MfCartService mfCartService, MfCaseService mfCaseService, MfCouponService couponService) {
+	public MfCartAction(MfCartService mfCartService, MfCaseService mfCaseService, MfCouponService couponService, MfOrderService mfOrderService) {
 		this.mfCartService = mfCartService;
         this.mfCaseService = mfCaseService;
         this.couponService = couponService;
-
+        this.mfOrderService = mfOrderService;
 	}
 
 	@Action(value = "add", results = { 
@@ -266,7 +271,139 @@ public class MfCartAction extends AbstractAction implements Preparable,
             @Result(name = "input", location = "/user/confirmOrder.jsp") }, interceptorRefs = @InterceptorRef(value = "MyStack", params = {
             "validation.validateAnnotatedMethodOnly", "true" }))
     public String confirmOrder() {
-        return showCart();
+        String result = showCart();
+        MfOrder order = mfOrderService.createOrderByCart(this.mfCartList);
+        this.orderNo = order.getOrderNo();
+        return result;
+    }
+
+    @Action(value = "toAlipay", results = {
+            @Result(name = "success", location = "/user/confirmOrder.jsp"),
+            @Result(name = "input", location = "/user/confirmOrder.jsp") }, interceptorRefs = @InterceptorRef(value = "MyStack", params = {
+            "validation.validateAnnotatedMethodOnly", "true" }))
+    public String toAlipay() {
+
+        HttpServletResponse response = ApplicationContext.getContext().getResponse();
+        HttpServletRequest request = ApplicationContext.getContext().getRequest();
+        MfOrder order = this.mfOrderService.getMfOrderById(orderNo);
+        if(order == null || null == order.getDetails() || order.getDetails().size() == 0){
+            return ActionSupport.INPUT;
+        }
+        Set<MfOrderDetail> details = order.getDetails();
+        ////////////////////////////////////请求参数//////////////////////////////////////
+        try {
+            //支付类型
+            String payment_type = "1";
+            //必填，不能修改
+            //服务器异步通知页面路径
+            String notify_url = "http://www.colormefun.cn/alipay/notify_url.jsp";
+            //需http://格式的完整路径，不能加?id=123这类自定义参数
+
+            //页面跳转同步通知页面路径
+            String return_url = "http://www.colormefun.cn/alipay/return_url.jsp";
+            //需http://格式的完整路径，不能加?id=123这类自定义参数，不能写成http://localhost/
+
+            //卖家支付宝帐户
+            String seller_email = "colormefun.web@qq.com";
+            //必填
+
+            //商户订单号
+            String out_trade_no = order.getOrderNo();
+            //商户网站订单系统中唯一订单号，必填
+
+            //订单名称
+            String subject = getOrderSubject(details);
+            //必填
+
+            //付款金额
+            String total_fee = order.getSummary().toString();
+            //必填
+
+            //订单描述
+            String body = getOrderBody(details);
+            //商品展示地址
+            String show_url = "http://www.colormefun.cn/detail.jsp?caseNo=" + getCaseNo(details);
+            //需以http://开头的完整路径，例如：http://www.商户网址.com/myorder.html
+
+            //防钓鱼时间戳
+            String anti_phishing_key = AlipaySubmit.query_timestamp();
+            //若要使用请调用类文件submit中的query_timestamp函数
+
+            //客户端的IP地址
+            String exter_invoke_ip = request.getRemoteAddr();
+            //非局域网的外网IP地址，如：221.0.0.1
+
+
+            //////////////////////////////////////////////////////////////////////////////////
+
+            //把请求参数打包成数组
+            Map<String, String> sParaTemp = new HashMap<String, String>();
+            sParaTemp.put("service", "create_direct_pay_by_user");
+            sParaTemp.put("partner", AlipayConfig.partner);
+            sParaTemp.put("_input_charset", AlipayConfig.input_charset);
+            sParaTemp.put("sign_type", AlipayConfig.sign_type);
+            sParaTemp.put("sign", AlipayConfig.key);
+            sParaTemp.put("payment_type", payment_type);
+            sParaTemp.put("notify_url", notify_url);
+            sParaTemp.put("return_url", return_url);
+            sParaTemp.put("seller_email", seller_email);
+            sParaTemp.put("out_trade_no", out_trade_no);
+            sParaTemp.put("subject", subject);
+            sParaTemp.put("total_fee", total_fee);
+//		sParaTemp.put("seller_id", AlipayConfig.partner);
+            sParaTemp.put("body", body);
+            sParaTemp.put("show_url", show_url);
+            sParaTemp.put("anti_phishing_key", anti_phishing_key);
+            sParaTemp.put("exter_invoke_ip", exter_invoke_ip);
+
+            //建
+            String sHtmlText = AlipaySubmit.buildRequest(sParaTemp, "get", "确认");
+            response.setContentType("text/html charset=utf-8");
+            response.getWriter().println(sHtmlText);
+        }catch (Exception e){
+            return ActionSupport.INPUT;
+        }
+        return null;
+    }
+
+    private String getCaseNo(Set<MfOrderDetail> details) {
+        return details.iterator().next().getCaseNo()+"";
+    }
+
+    private String getOrderBody(Set<MfOrderDetail> details) {
+        String body = "";
+        for(MfOrderDetail detail : details){
+            body += detail.getMfCase().getTitle()+" × "+detail.getQty()+", ";
+        }
+        if(body.endsWith(", ")){
+            body = body.substring(0, body.length() - 1);
+        }
+        if(body.length()==0){
+            body = "无";
+        }
+        return body;
+    }
+
+    private String getOrderSubject(Set<MfOrderDetail> details) {
+        String subject = "";
+        for(MfOrderDetail detail : details){
+            subject += detail.getMfCase().getTitle()+" ,";
+        }
+        if(subject.endsWith(", ")){
+            subject = subject.substring(0, subject.length() - 1);
+        }
+        if(subject.length()==0){
+            subject = "无标题订单";
+        }
+        return subject;
+    }
+
+    private String getOrderTotalFee(Set<MfOrderDetail> details) {
+        BigDecimal totalFee = new BigDecimal(0);
+        for(MfOrderDetail detail : details){
+            totalFee = totalFee.add(detail.getPrice());
+        }
+        return totalFee.toString();
     }
 
     //http://localhost/user/cart/addToCart.do?mfCase.caseNo=1&mfCase.ticketNumber=5
@@ -528,6 +665,14 @@ public class MfCartAction extends AbstractAction implements Preparable,
 
     public void setMfCase(MfCase mfCase) {
         this.mfCase = mfCase;
+    }
+
+    public String getOrderNo() {
+        return orderNo;
+    }
+
+    public void setOrderNo(String orderNo) {
+        this.orderNo = orderNo;
     }
 
     public BigDecimal getTotalPrice(){

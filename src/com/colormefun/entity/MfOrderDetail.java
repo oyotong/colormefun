@@ -18,6 +18,7 @@ public class MfOrderDetail {
     private Integer qty;
     private BigDecimal price;
 //    private BigDecimal cuponePrice;
+    @Transient
     private String priceStr;
     private String comment;
 
@@ -86,7 +87,7 @@ public class MfOrderDetail {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_no")
+    @JoinColumn(name = "order_no", insertable = false, updatable = false)
     public MfOrder getOrder() {
         return order;
     }
@@ -96,7 +97,7 @@ public class MfOrderDetail {
     }
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "case_no")
+    @JoinColumn(name = "case_no", insertable = false, updatable = false)
     public MfCase getMfCase() {
         return mfCase;
     }

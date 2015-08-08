@@ -3,6 +3,7 @@ package com.colormefun.service;
 import java.io.Serializable;
 import java.util.*;
 
+import com.colormefun.entity.MfCart;
 import com.colormefun.entity.MfOrder;
 import com.colormefun.entity.MfUser;
 
@@ -32,5 +33,7 @@ public interface MfOrderService {
 
     public void removeOrder(MfOrder order);
 
-    public void payOrder(MfOrder order);
+    public void completePayOrder(String orderNo);
+
+    public MfOrder createOrderByCart(List<MfCart> mfCartList);
 }
